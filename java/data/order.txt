@@ -1,0 +1,1 @@
+java Populate movies.dat tags.dat movie_genres.dat movie_directors.dat movie_actors.dat movie_countries.dat movie_tags.dat user_taggedmovies.dat

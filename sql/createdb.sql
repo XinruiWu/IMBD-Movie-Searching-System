@@ -1,0 +1,68 @@
+CREATE TABLE movies(
+	MID VARCHAR(5) PRIMARY KEY,
+	Title VARCHAR(105) NOT NULL,
+	ReleaseYear NUMBER NOT NULL,
+  RAR NUMBER NOT NULL,
+  RAN NUMBER NOT NULL
+);
+
+CREATE TABLE movie_genres(
+	MID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (MID) REFERENCES movies(MID) ON DELETE CASCADE,
+	Genre VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE movie_directors(
+	MID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (MID) REFERENCES movies(MID) ON DELETE CASCADE,
+	DID VARCHAR(50) NOT NULL,
+  DirectorName VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE movie_actors(
+	MID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (MID) REFERENCES movies(MID) ON DELETE CASCADE,
+	AID VARCHAR(50) NOT NULL,
+  ActorName VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE movie_countries(
+	MID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (MID) REFERENCES movies(MID) ON DELETE CASCADE,
+  Country VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE tags(
+	TID VARCHAR(5) PRIMARY KEY, 
+  TagText VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE movie_tags(
+	MID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (MID) REFERENCES movies(MID) ON DELETE CASCADE,
+  TID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (TID) REFERENCES tags(TID) ON DELETE CASCADE,
+  TagWeight NUMBER NOT NULL
+);
+
+CREATE TABLE user_taggedmovies(
+  USID VARCHAR(5) NOT NULL,
+	MID VARCHAR(5) NOT NULL, 
+	FOREIGN KEY (MID) REFERENCES movies(MID) ON DELETE CASCADE,
+  TID VARCHAR(5) NOT NULL,
+	FOREIGN KEY (TID) REFERENCES tags(TID) ON DELETE CASCADE
+);
+
+CREATE INDEX movie_genres_genre_index ON movie_genres (Genre);
+
+CREATE INDEX movies_releaseyear_index ON movies (ReleaseYear);
+
+CREATE INDEX movie_countries_country_index ON movie_countries (Country);
+
+CREATE INDEX movie_actors_actorname_index ON movie_actors (ActorName);
+
+CREATE INDEX movie_directors_directorname_index ON movie_directors (DirectorName);
+
+CREATE INDEX movie_tags_tagweight ON movie_tags (TagWeight);
+
+CREATE INDEX user_taggedmovies_usid ON user_taggedmovies (USID);

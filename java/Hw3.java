@@ -14,6 +14,11 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+
+/**
+ * This is a java file integrating OO-concept and JDBC APIs to do dynamic query on back-end database
+ */
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
